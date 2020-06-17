@@ -11,16 +11,12 @@ const [friends, setFriends] = useState([])
 
 
 const getFriends = e => {
-  const token = window.localStorage.getItem('token');
+  e.preventDefault();
   //make axios post request and send credentials
-  console.log(friends)
   axiosWithAuth() //change axios to axiosWithAuth() for all axios calls
-    .post('/api/friends', friends)
+    .get('/api/friends')
     .then(res => { 
-      setFriends({
-        //map over friends data array object?
-        friends: res.data
-      })
+      setFriends(res.data)
     })
     .catch(err => console.log(err.response));
 };
@@ -29,13 +25,20 @@ const getFriends = e => {
   return (
     <div>
       <h2> add friend form goes here </h2> 
-      <button> View Friends</button>
+
+      <button onClick={getFriends}> View Friends</button>
 
       <AddFriend />
-      </div>
-
       
-     
+
+      {friends.map(friend => (
+        <div>
+          <h2> Name: {friend.name}  </h2>
+          <p> Age: {friend.age}  </p>
+          <p> Email: {friend.email}  </p>
+        </div>
+      ))}
+   </div>  
     
   )
 }

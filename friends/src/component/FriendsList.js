@@ -1,54 +1,42 @@
 import React, { useState } from 'react'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
+import AddFriend from './AddFriend';
 
 function FriendsList(props) {
 
-  const { name, nickname } = props;
-const [form, setForm] = useState(
-  {
-    name: '',
-    nickname: ''
-  }
-)
+  //const { name, age, email } = props;
 
-const onChange = e => {
-  e.preventDefault();
-setForm({
-  ...form,
-  [e.target.name]: e.target.value
-})
-};
+const [friends, setFriends] = useState([])
 
-const addFriend = e => {
-  e.preventDefault();
+
+
+const getFriends = e => {
+  const token = window.localStorage.getItem('token');
   //make axios post request and send credentials
-  console.log(form)
+  console.log(friends)
   axiosWithAuth() //change axios to axiosWithAuth() for all axios calls
-    .post('/api/friends', form)
+    .post('/api/friends', friends)
     .then(res => { 
-      console.log(res)
+      setFriends({
+        //map over friends data array object?
+        friends: res.data
+      })
     })
     .catch(err => console.log(err.response));
 };
+
+
   return (
     <div>
       <h2> add friend form goes here </h2> 
-      <form onSubmit={addFriend}>
-          <input
-            type="text"
-            name="name"
-            value={name}
-            onChange={onChange}
-          />
-          <input
-            type="text"
-            name="nickname"
-            value={nickname}
-            onChange={onChange}
-          />
-          <button>Add Friend</button>
-        </form>
-    </div>
+      <button> View Friends</button>
+
+      <AddFriend />
+      </div>
+
+      
+     
+    
   )
 }
 

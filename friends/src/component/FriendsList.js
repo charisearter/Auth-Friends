@@ -24,7 +24,7 @@ const addFriend = e => {
   //make axios post request and send credentials
   console.log(form)
   axiosWithAuth() //change axios to axiosWithAuth() for all axios calls
-    .post('http://localhost:5000/api/friends', form)
+    .post('/api/friends', form)
     .then(res => { 
       console.log(res)
     })

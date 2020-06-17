@@ -28,7 +28,8 @@ const login = e => {
   //make axios post request and send credentials
   console.log(credentials)
   axiosWithAuth() //change axios to axiosWithAuth() for all axios calls
-    .post('http://localhost:5000/api/login', credentials)
+  //only need ending of url because base is defined in axiosWithAuth 
+    .post('/api/login', credentials)
     .then(res => {
       window.localStorage.setItem('token', res.data.payload);
       //navigate user to FriendsList

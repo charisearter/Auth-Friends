@@ -30,7 +30,7 @@ const getFriends = e => {
 
       <AddFriend />
       
-
+{/* //display friends after button click */}
       {friends.map(friend => (
         <div>
           <h2> Name: {friend.name}  </h2>

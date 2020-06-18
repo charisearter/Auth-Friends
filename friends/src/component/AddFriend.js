@@ -19,7 +19,7 @@ setForm({
 })
 };
 const addFriend = e => {
-  e.preventDefault();
+ 
   //make axios post request and send credentials
   console.log(form)
   axiosWithAuth() //change axios to axiosWithAuth() for all axios calls

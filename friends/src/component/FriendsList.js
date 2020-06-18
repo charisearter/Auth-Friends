@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 import AddFriend from './AddFriend';
 
+
 function FriendsList(props) {
 
   //const { name, age, email } = props;
-
+  
 const [friends, setFriends] = useState([])
 
 
@@ -20,7 +21,13 @@ const getFriends = e => {
     })
     .catch(err => console.log(err.response));
 };
-
+const onDelete = (e, id) => {
+  e.preventDefault();
+  axiosWithAuth()
+  .delete(`/api/friends/${id}`)
+  .then(res => setFriends(res.data))
+  .catch(err => console.log(err.response.message))
+};
 
   return (
     <div>
@@ -32,10 +39,11 @@ const getFriends = e => {
       
 {/* //display friends after button click */}
       {friends.map(friend => (
-        <div>
+        <div key={friend.id}>
           <h2> Name: {friend.name}  </h2>
           <p> Age: {friend.age}  </p>
           <p> Email: {friend.email}  </p>
+          <button onClick={(e) => onDelete(e, friend.id)}>Delete Friend</button>
         </div>
       ))}
    </div>  

@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
+import { Link, Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 
 //import components
 import Login from './component/Login'
 import FriendsList from './component/FriendsList';
+import AddFriend from './component/AddFriend';
+import DeleteFriend from './component/DeleteFriend';
 
 function App() {
   return (
@@ -12,14 +14,24 @@ function App() {
       <div className="App">
        <ul>
         <li>
-          <Link to="/login">Login Page</Link>
+          <Link to="/login">Login</Link>
         </li>
         <li>
-          <Link to="/protected">Friends List  (Protected Page)</Link>
+          <Link to="/friends">Friends List</Link>
+        </li>
+        <li>
+          <Link to='/add'>Add Friend</Link>
+        </li>
+        <li>
+          <Link to='/delete'>Delete Friend</Link>
         </li>
       </ul>
-      <Route path="/login" component={Login} />
-      <Route path="/protected" component={FriendsList} />
+      <Switch>
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/protected" component={FriendsList} />
+      <Route exact path="/protected" component={AddFriend} />
+      <Route exact path="/protected" component={DeleteFriend} />
+      </Switch>
     </div>
   </Router>
   );

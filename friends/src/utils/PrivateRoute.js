@@ -2,7 +2,7 @@
 //remembers if logged in or not
 //navigating to this route will redirect to login page
 
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
